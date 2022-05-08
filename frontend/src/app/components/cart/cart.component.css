@@ -1,0 +1,31 @@
+.card{
+    margin: auto;
+    width: 490px;
+    height: 410px;
+    text-align: center;
+    border-color: white;
+}
+
+img{
+    margin: auto;
+    width: 250px;
+    height: 200px;
+    padding-top: 5%;
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-bottom: 5%;
+}
+
+.card-body{
+    text-align: center;
+    
+}
+
+.h5{
+    margin: auto;
+    font-size: small;
+}
+
+.h4, .h6{
+    margin: auto;
+}

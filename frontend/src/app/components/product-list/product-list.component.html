@@ -1,0 +1,38 @@
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<p>product-list works!</p>
+  <div class="row">
+    <div class="col-md-5" *ngFor="let product of products;">
+        <div class="card">
+            <img class="card-img-top" src="assets/placeholder.png" alt="Card image cap">
+            <div class="card-body">
+              <h3 class="card-title"> {{product.productname}} by {{product.brandname}}</h3>
+              <h5 class="card-title"> {{product.price | currency}}</h5>
+              <p class="card-text">{{product.productdescription}}</p>
+            
+<div class="container">
+  <div class="left">
+    <button href="#" class="btn btn-primary">View Details</button>
+  </div>
+  <div class="right">
+    <button class="btn btn-info" (click)="addToCart(product)" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+      Add To Cart
+    </button>
+  </div>
+</div>
+
+
+              <div class="collapse" id="collapseExample">
+                <div class="card card-body">
+                  <p>Hey</p>
+                  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                </div>
+              </div>
+            </div>
+          </div>
+    </div>
+  </div>
