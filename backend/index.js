@@ -3,8 +3,13 @@ require('dotenv').config()
 const cors = require('cors');
 const app = express();
 const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser")
 
-app.use(cors());
+app.use(cookieParser())
+app.use(cors({
+    credentials: true
+}));
+
 app.use(express.static('public'));
 app.use(bodyParser());
 
@@ -24,6 +29,9 @@ app.post('/api/v2/users/', api2.addUser);
 app.put('/api/v2/users/:id', api2.updateUser);
 app.delete('/api/v2/users/:id', api2.deleteUser);
 app.post('/api/v2/login', api2.testLogin)
+app.get('/api/v2/cookie/:id', api2.getUserCookie);
+app.post('/api/v2/logout',api2.userLogout)
+
 
 app.get('*', (request, response) => {
     response.json('The page has not been found')

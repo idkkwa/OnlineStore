@@ -1,6 +1,8 @@
 require('dotenv').config()
 const { Client } = require('pg')
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const { router } = require('express').Router()
 
 const options = {
     port: process.env.DB_PORT,
@@ -77,67 +79,95 @@ const deleteUser = (request, response) => {
     });
   };
 
-  // const testLogin = (request, response) => {
-  //   const username = request.body.username;
-  //   const password = request.body.password;
-
-  //   const client = new Client(options)
-  //   client.connect()
-  //   client.query('SELECT password FROM users WHERE username = $1 AND password = $2', [username, password], (error, result) => {
-
-  //   console.log("User Typed:", username);
-  //   console.log(result);
-  //     if(result.rowCount === 0){
-  //       response.status(403).json({error: "Username or Password is incorrect"})
-
-  //       // response.status(403);
-  //       // response.end("Username or Password is incorrect")        
-  //     }
-
-  //     if(result.rowCount > 1){
-  //       response.status(500);
-  //     }
-
-  //     if(result.rowCount == 1){
-  //         response.status(200).send(`The User is logged in!`);
-
-  //     }
-  //   });
-  // };
-
   const testLogin = (request, response) => {
     const username = request.body.username;
     const password = request.body.password;
 
     const client = new Client(options)
     client.connect()
-    const hash = bcrypt.hashSync(password, 10)
-    console.log( bcrypt.getRounds(hash))
-    client.query('SELECT id FROM users WHERE username = $1 AND password = $2', [username, password], (error, result) => {
-    console.log("User Typed:", username);
-    console.log("Yo ",result.fields[0].name);
+      client.query('SELECT * FROM users WHERE username = $1', [username], (error, r) => {
+        console.log("Database:", r.rows);
 
-    if(result.fields[0].name == 'id'){
-      console.log("it worked")
-      }
+            console.log("User Input:", password)
+            console.log("Database:", r.rows[0].password);
+            
+            if(r.rowCount === 0){
+              response.status(403).json({error: "Username or Password is incorrect"})     
+            }
+      
+            if(r.rowCount > 1){
+              response.status(500);
+            }
+      
+            if(r.rowCount == 1){   
 
-      if(result.rowCount === 0){
-        response.status(403).json({error: "Username or Password is incorrect"})
+                bcrypt.compare(password, r.rows[0].password).then(function(result) {     
+                  console.log("Answer is ", result)
 
-        // response.status(403);
-        // response.end("Username or Password is incorrect")        
-      }
+                  if(!result){
+                  response.status(403).send({message: "Password is incorrect"})           
+                }
 
-      if(result.rowCount > 1){
-        response.status(500);
-      }
+                //   if(result){
+                //     response.status(200).send(`The User is logged in!`);
+                // } 
 
-      if(result.rowCount == 1){
-          response.status(200).send(`The User is logged in!`);
+              });
+            }
+  
+        const token = jwt.sign(r.rows[0].id, "secret")
 
-      }
+        response.cookie("jwt", token, {
+          httpOnly: true,
+          maxAge: 24 * 60 * 60 * 1000
+        })
+        
+        response.send({
+          message: "success"
+        })        
     });
   };
+
+  const getUserCookie = (request, response) => {
+    try {
+      const cookie = request.cookies['jwt']
+
+      const claims = jwt.verify(cookie, 'secret')
+
+      if (!claims) {
+          return response.status(401).send({
+              message: 'unauthenticated'
+          })
+      }
+
+      const client = new Client(options)
+      client.connect()
+      const id = parseInt(request.params.id);
+      client.query('SELECT * FROM users WHERE id = $1', [id], (err, r) => {
+        console.log(r.rows)
+        //response.send(r.rows[0].id);
+      });
+
+      // const user = await User.findOne({_id: claims._id})
+
+      // const {password, ...data} = await user.toJSON()
+
+      //response.send(data)
+
+    } catch (e) {
+        return response.status(401).send({
+            message: 'unauthenticated'
+        })
+    }
+  }
+
+  const userLogout = (request, response) => {
+    response.cookie('jwt', '', {maxAge: 0})
+
+    response.send({
+      message: 'success'
+    })
+  }
 
 module.exports = {
  getAllUsers,
@@ -145,5 +175,7 @@ module.exports = {
  addUser,
  updateUser,
  deleteUser,
- testLogin
+ testLogin,
+ userLogout,
+ getUserCookie
 }
