@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CartService } from './services/cart.service';
+
 
 @Component({
   selector: 'app-root',
@@ -8,16 +8,10 @@ import { CartService } from './services/cart.service';
 })
 
 export class AppComponent implements OnInit{
-  public totalItem : number = 0;
-  constructor(private cartService : CartService) { }
+  constructor() { }
 
-  ngOnInit(): void {
 
-    this.cartService.getProduct()
-    .subscribe(data =>{
-      this.totalItem = data.length;
-    })
+  ngOnInit(): void {}
 
-  }
   title = 'frontend';
 }

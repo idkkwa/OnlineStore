@@ -7,7 +7,8 @@ const cookieParser = require("cookie-parser")
 
 app.use(cookieParser())
 app.use(cors({
-    credentials: true
+    credentials: true,
+    origin: ['http://localhost:3000','http://localhost:8080','http://localhost:4200']
 }));
 
 app.use(express.static('public'));
@@ -29,7 +30,7 @@ app.post('/api/v2/users/', api2.addUser);
 app.put('/api/v2/users/:id', api2.updateUser);
 app.delete('/api/v2/users/:id', api2.deleteUser);
 app.post('/api/v2/login', api2.testLogin)
-app.get('/api/v2/cookie/:id', api2.getUserCookie);
+app.get('/api/v2/cookie', api2.getUserCookie);
 app.post('/api/v2/logout',api2.userLogout)
 
 

@@ -86,10 +86,10 @@ const deleteUser = (request, response) => {
     const client = new Client(options)
     client.connect()
       client.query('SELECT * FROM users WHERE username = $1', [username], (error, r) => {
-        console.log("Database:", r.rows);
+        // console.log("Database:", r.rows);
 
-            console.log("User Input:", password)
-            console.log("Database:", r.rows[0].password);
+        //     console.log("User Input:", password)
+        //     console.log("Database:", r.rows[0].password);
             
             if(r.rowCount === 0){
               response.status(403).json({error: "Username or Password is incorrect"})     
@@ -102,7 +102,7 @@ const deleteUser = (request, response) => {
             if(r.rowCount == 1){   
 
                 bcrypt.compare(password, r.rows[0].password).then(function(result) {     
-                  console.log("Answer is ", result)
+                  //console.log("Answer is ", result)
 
                   if(!result){
                   response.status(403).send({message: "Password is incorrect"})           
@@ -142,17 +142,10 @@ const deleteUser = (request, response) => {
 
       const client = new Client(options)
       client.connect()
-      const id = parseInt(request.params.id);
-      client.query('SELECT * FROM users WHERE id = $1', [id], (err, r) => {
-        console.log(r.rows)
-        //response.send(r.rows[0].id);
-      });
-
-      // const user = await User.findOne({_id: claims._id})
-
-      // const {password, ...data} = await user.toJSON()
-
-      //response.send(data)
+        client.query('SELECT * FROM users WHERE id = $1', [claims], (error, r) => {
+          console.log(r.rows)
+          response.send(r.rows[0].username)
+        })
 
     } catch (e) {
         return response.status(401).send({
