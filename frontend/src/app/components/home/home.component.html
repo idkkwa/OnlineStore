@@ -1,1 +1,29 @@
-{{message}}
+<div *ngFor="let user of users;">
+    
+    <div *ngIf="!user.admin">
+      <mat-chip-list aria-label="Dog selection">
+        <mat-chip>
+          <mat-chip-avatar>
+              <img src="assets/placeholder.png" alt="Grey Profile Photo"/>
+          </mat-chip-avatar>
+          Welcome {{user.username}}!
+        </mat-chip>
+      </mat-chip-list>      
+    </div>
+
+    <div *ngIf="user.admin">
+        <mat-chip-list aria-label="Dog selection">
+          <mat-chip color="primary" selected>
+            <mat-chip-avatar>
+                <img src="assets/placeholder.png" alt="Grey Profile Photo"/>
+            </mat-chip-avatar>
+            {{user.username}} | Admin
+          </mat-chip>
+        </mat-chip-list>    
+      </div>
+
+
+      
+</div>
+
+<app-product-list></app-product-list>

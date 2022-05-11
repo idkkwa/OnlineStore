@@ -23,9 +23,42 @@ img{
 
 .h5{
     margin: auto;
-    font-size: small;
 }
 
 .h4, .h6{
     margin: auto;
+}
+
+ .mat-card {
+    width: 70%;
+    margin: auto;
+    font-size: x-large;
+    height: auto;
+  }
+  
+.button{
+  width: auto;
+  margin-left:25%;
+  margin-right:25%;
+}
+
+td, th {
+    width: 25%;
+  }
+
+.mat-success {
+    background-color: green;
+    color: #fff;
+}
+
+.card2 {
+  margin: auto;
+  width: 30%;
+}
+
+.mat-card-title, .mat-card-subtitle, p, img{
+  display: flex;
+  justify-content: center; /* align horizontal */
+  align-items: center; /* align vertical */
+  font-size: x-large;
 }

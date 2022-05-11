@@ -3,6 +3,10 @@ import { LoginService } from 'src/app/services/login.service';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { HttpInterceptor, HttpEvent, HttpHandler, HttpRequest } from '@angular/common/http';
+import { Emitters } from 'src/app/emitters/emitters';
+import {ErrorStateMatcher} from '@angular/material/core';
+import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +24,9 @@ export class LoginComponent implements OnInit {
     private loginService : LoginService, 
     private http: HttpClient,
     private formBuilder: FormBuilder,
-    private router: Router) { }
+    private router: Router,
+   
+    ) { }
 
   ngOnInit(): void {
     // this.compareUser()
@@ -35,9 +41,14 @@ export class LoginComponent implements OnInit {
   submit(): void{
     this.http.post("http://localhost:3000/api/v2/login", this.form.getRawValue(), {
       withCredentials: true
-    }).subscribe(() => this.router.navigate(['/']))
+    }).subscribe(() => this.router.navigate(['/home']))
   }
 
+  checkAdmin() {
+
+  }
+
+    userFormControl = new FormControl('', [Validators.required, Validators.email]);
 
 //   login(){
 //     this.http.get<any>("http://localhost:3000/api/v2/users/")
@@ -53,7 +64,7 @@ export class LoginComponent implements OnInit {
 //   compareUser(): void {
 //     const data = {
 //        username: this.model.username,
-//        password:this.model.password,      
+//        password: this.model.password,      
 //     }
 
 //     this.loginService.check(data)
@@ -66,4 +77,7 @@ export class LoginComponent implements OnInit {
 //           console.log(error);
 //         });
 //   }
+}
+
+export class InputErrorsExample {
 }

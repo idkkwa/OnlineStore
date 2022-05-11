@@ -7,7 +7,6 @@ import { CartService } from 'src/app/services/cart.service';
   styleUrls: ['./cart.component.css']
 })
 export class CartComponent implements OnInit {
-
   public products: any = [];
   public grandTotal : number = 0;
   constructor(private cartService: CartService) { }
@@ -26,6 +25,11 @@ export class CartComponent implements OnInit {
 
   emptyCart(){
     this.cartService.removeAllCart();
+  }
+
+   myFunction() {
+     alert('Thanks for shopping!')
+     this.cartService.removeAllCart();
   }
 
 }

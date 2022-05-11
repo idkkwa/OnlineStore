@@ -28,6 +28,7 @@ app.get('/api/v2/users/', api2.getAllUsers);
 app.get('/api/v2/users/:id', api2.getUserById);
 app.post('/api/v2/users/', api2.addUser);
 app.put('/api/v2/users/:id', api2.updateUser);
+app.put('/api/v2/admin/:id', api2.updateUserAdmin);
 app.delete('/api/v2/users/:id', api2.deleteUser);
 app.post('/api/v2/login', api2.testLogin)
 app.get('/api/v2/cookie', api2.getUserCookie);

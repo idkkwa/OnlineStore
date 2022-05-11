@@ -1,22 +1,19 @@
-.card-body{
-    text-align: center;
-}
-.card{
+
+.example-card {
     margin: auto;
-    margin-right: 20px;
-    margin-bottom: 20px;
-    width: 350px;
-    height: 450px;
-}
+    max-width: 400px;
+    margin-bottom: 8px;
+  }
+  
+  .example-header-image {
+    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    background-size: cover;
+  }
 
-.left {
-    float: left;
-    width: 100px;
-    height: 22px;
-}
+  p{
+    font-size: large;
+  }
 
-.right {
-    float: right;
-    width: 100px;
-    height: 22px;
+  button{
+    margin: auto;  
 }

@@ -1,0 +1,11 @@
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.example-spacer2 {
+    flex: .03 0 auto;
+  }
+
+.mat-icon {
+    font-size: 36px;
+}

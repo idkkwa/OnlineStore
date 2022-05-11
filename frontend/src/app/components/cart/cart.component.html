@@ -1,6 +1,4 @@
-<p>cart works!</p>
-
-<ng-container *ngIf="products.length != 0">
+<!-- <ng-container *ngIf="products.length != 0">
     <div class="card-table">
         <div class="cart-product">
             <table class="table table-repsonse">
@@ -31,7 +29,7 @@
                         <td colspan="4"></td>
                         <td><button (click)="emptyCart()" class="btn btn-danger">Empty Cart</button></td>
                         <td><button [routerLink]="['/products']" routerLinkActive="router-link-active"  class="btn btn-primary">Add Another Item</button></td>
-                        <td><button class="btn btn-outline-success">Checkout</button></td>
+                        <td><button (click)="myFunction()" [routerLink]="['/home']" class="btn btn-outline-success">Checkout</button></td>
                     </tr>
                     <div class="card2">
                         <div class="card-body">
@@ -43,6 +41,8 @@
         </div>
     </div>
 </ng-container>
+
+
 
 <ng-container *ngIf="products.length == 0">
 <div class="container">
@@ -58,4 +58,76 @@
     </div>
 </div>
 </div>
+</ng-container> -->
+
+<ng-container *ngIf="products.length != 0">
+    <mat-card>
+        <mat-card-title>Checkout</mat-card-title>   
+    <mat-table [dataSource]="products">
+
+        <ng-container matColumnDef="No">
+          <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
+          <mat-cell *matCellDef="let i = index;"> {{i+1}} </mat-cell>
+        </ng-container>
+      
+        <ng-container matColumnDef="productname">
+          <mat-header-cell *matHeaderCellDef> Product Name </mat-header-cell>
+          <mat-cell *matCellDef="let product"> {{product.productname}} </mat-cell>
+        </ng-container>
+      
+        <ng-container matColumnDef="brandname">
+          <mat-header-cell *matHeaderCellDef> Brand Name </mat-header-cell>
+          <mat-cell *matCellDef="let product"> {{product.brandname}} </mat-cell>
+        </ng-container>
+      
+        <ng-container matColumnDef="price">
+            <mat-header-cell *matHeaderCellDef> Price </mat-header-cell>
+            <mat-cell *matCellDef="let product"> <strong> {{product.price | currency}} </strong></mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="quantity">
+            <mat-header-cell *matHeaderCellDef> Quantity </mat-header-cell>
+            <mat-cell *matCellDef="let product"> {{product.quantity}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="total">
+            <mat-header-cell *matHeaderCellDef> Total </mat-header-cell>
+            <mat-cell *matCellDef="let product"> <strong> {{product.total | currency}} </strong></mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="action">
+            <mat-header-cell *matHeaderCellDef>  </mat-header-cell>
+            <mat-cell *matCellDef="let product"> <button mat-raised-button color="warn" (click)="removeItem(product)"> Delete </button> </mat-cell>
+          </ng-container>
+          
+        <!-- Header and Row Declarations -->
+        <mat-header-row *matHeaderRowDef="['No', 'productname', 'brandname', 'price', 'quantity', 'total', 'action']"></mat-header-row>
+        <mat-row *matRowDef="let product of products; columns: ['No', 'productname', 'brandname', 'price', 'quantity', 'total', 'action']"></mat-row>
+
+      </mat-table>
+
+        <br>     
+        <mat-card-actions align="end">
+            <button  mat-raised-button color="warn" (click)="emptyCart()" class="btn btn-danger">Empty Cart</button>
+            <button  mat-raised-button color="primary" [routerLink]="['/products']" routerLinkActive="router-link-active"  class="btn btn-primary">Add Another Item</button>
+            <button  mat-raised-button color="success" (click)="myFunction()" [routerLink]="['/home']" class="btn btn-outline-success">Checkout</button>
+          </mat-card-actions>    
+      </mat-card>
+        <br>
+      <mat-card align="end"><strong>Grand Total: {{grandTotal | currency}}</strong></mat-card>
+
+</ng-container>
+
+<ng-container *ngIf="products.length == 0">
+
+    <mat-card class="card2">
+        <mat-card-title>My Cart</mat-card-title>
+        <img src="assets/emptycart.png" alt="cart">
+        <mat-card-subtitle>Your cart is empty!</mat-card-subtitle>
+        <p>Add some items now!</p>
+        <mat-card-actions>
+          <button mat-raised-button color="primary" routerLink="/products">Shop Now</button>
+        </mat-card-actions>
+    </mat-card>
+
 </ng-container>

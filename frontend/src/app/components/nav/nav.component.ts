@@ -3,6 +3,8 @@ import { Emitters } from 'src/app/emitters/emitters';
 import {HttpClient} from '@angular/common/http';
 import { CartService } from 'src/app/services/cart.service';
 
+
+
 @Component({
   selector: 'app-nav',
   templateUrl: './nav.component.html',
@@ -27,10 +29,11 @@ export class NavComponent implements OnInit {
     Emitters.authEmitter.subscribe(
       (auth: boolean) => {
         this.authenticated = auth;
+        console.log("Logged In: ", auth)
       }
+      
     );
 
-    console.log(this.authenticated)
   }
 
   logout(): void {

@@ -1,12 +1,45 @@
 <p>login works!</p>
-  <!-- Pills content -->
+  <div fxLayout="row" fxLayoutAlign="center center" class="login-main">
+    <mat-card >
+      <form class="example-form" [formGroup]="form" (submit)="submit()" action="">
+    <mat-card-header>
+      <mat-card-title>Login Page</mat-card-title>
+    </mat-card-header>
+    <mat-card-content fxLayout="column">
 
-  <form [formGroup]="form" (submit)="submit()" action="">
+      
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Username</mat-label>
+        <input type="text" matInput class="form-control" formControlName="username" placeholder="username11">
+        <mat-error *ngIf="userFormControl.hasError('user') && !userFormControl.hasError('required')">
+          Please enter a valid username
+        </mat-error>
+        <mat-error *ngIf="userFormControl.hasError('required')">
+          Username is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+        
+      <br>
 
-    <input formControlName="username" type="text" class="form-control" placeholder="Username">
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Password</mat-label>
+        <input type="password" matInput class="form-control" formControlName="password"  placeholder="123456">
+        <mat-error *ngIf="userFormControl.hasError('user') && !userFormControl.hasError('required')">
+          Please enter a valid password
+        </mat-error>
+        <mat-error *ngIf="userFormControl.hasError('required')">
+          Password is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
 
-    <input formControlName="password" type="password" class="form-control" placeholder="Password">
+    </mat-card-content>
+    <mat-card-actions align="end">
+      <button mat-raised-button color="primary" type="submit">Login</button>
+    </mat-card-actions>
 
-    <button class="w-100 btn btn-lg btn-primary" type="submit">Sign In</button>
-
-  </form>
+    <div>
+      <p>Not a member? <a type="link" [routerLink]="['/register']" routerLinkActive="router-link-active" >Register</a></p>
+    </div>
+      </form>
+    </mat-card>
+  </div>

@@ -31,7 +31,6 @@ const getUserById = (request, response) => {
 
 };
 
-
 // const addUser = async (request, response) => {
 //     const {username, password} = request.body;
 //     const admin = false;
@@ -42,7 +41,6 @@ const getUserById = (request, response) => {
 //           if(error) throw error;
 //       });      
 // };
-
 
 const addUser = async (request, response) => {
     //const salt = await bcrypt.genSalt(5);
@@ -68,6 +66,18 @@ const updateUser = (request, response) => {
         if(error) throw error;
     });
   };
+
+  const updateUserAdmin = (request, response) => {
+    const id = parseInt(request.params.id);
+    const { admin } = request.body;
+    const client = new Client(options)
+    client.connect()
+    client.query('UPDATE users SET admin = $1 WHERE id = $2', [admin, id], (error, results) => {
+        response.status(200).send(`The User with id ${id} has been modified.`);
+        if(error) throw error;
+    });
+  };
+  
   
 const deleteUser = (request, response) => {
     const id = parseInt(request.params.id);
@@ -86,6 +96,7 @@ const deleteUser = (request, response) => {
     const client = new Client(options)
     client.connect()
       client.query('SELECT * FROM users WHERE username = $1', [username], (error, r) => {
+
         // console.log("Database:", r.rows);
 
         //     console.log("User Input:", password)
@@ -123,7 +134,7 @@ const deleteUser = (request, response) => {
         })
         
         response.send({
-          message: "success"
+          message: "successful login"
         })        
     });
   };
@@ -143,8 +154,8 @@ const deleteUser = (request, response) => {
       const client = new Client(options)
       client.connect()
         client.query('SELECT * FROM users WHERE id = $1', [claims], (error, r) => {
-          console.log(r.rows)
-          response.send(r.rows[0].username)
+          // console.log(r.rows)
+          response.send(r.rows)
         })
 
     } catch (e) {
@@ -158,7 +169,7 @@ const deleteUser = (request, response) => {
     response.cookie('jwt', '', {maxAge: 0})
 
     response.send({
-      message: 'success'
+      message: 'successful logout'
     })
   }
 
@@ -170,5 +181,6 @@ module.exports = {
  deleteUser,
  testLogin,
  userLogout,
- getUserCookie
+ getUserCookie,
+ updateUserAdmin
 }
