@@ -26,6 +26,8 @@ import { DialogComponent } from './components/dialog/dialog.component';
 import { ProductCRUDdialogComponent } from './components/product-crud-dialog/product-cruddialog.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
+import { UserDialogComponent } from './components/user-dialog/user-dialog.component';
+import { UserCrudDialogComponent } from './components/user-crud-dialog/user-crud-dialog.component';
 
 
 
@@ -39,7 +41,9 @@ import {MatSortModule} from '@angular/material/sort';
     RegisterComponent,
     NavComponent,
     DialogComponent,
-    ProductCRUDdialogComponent
+    ProductCRUDdialogComponent,
+    UserDialogComponent,
+    UserCrudDialogComponent
   ],
   imports: [
     BrowserModule,

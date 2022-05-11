@@ -23,6 +23,14 @@ export class LoginService {
     return this.http.get<Login[]>(baseUrl);
   }
 
+  update(id: any, data: any): Observable<any> {
+    return this.http.put<any>(`${baseUrl}/${id}`, data);
+  }
+  
+  delete(id: any): Observable<any> {
+    return this.http.delete(`${baseUrl}/${id}`);
+  }
+
   check(data: any): Observable<any> {
     return this.http.post(loginURL, data);
 

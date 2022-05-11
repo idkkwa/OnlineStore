@@ -4,6 +4,7 @@ import { Login } from 'models/login.model';
 import { Emitters } from 'src/app/emitters/emitters';
 import {MatDialog, MatDialogModule} from '@angular/material/dialog';
 import { DialogComponent } from '../dialog/dialog.component';
+import { UserDialogComponent } from '../user-dialog/user-dialog.component';
 
 @Component({
   selector: 'app-home',
@@ -25,7 +26,7 @@ export class HomeComponent implements OnInit {
   }
 
   openUserDialog() {
-    this.dialog.open(DialogComponent, {
+    this.dialog.open(UserDialogComponent, {
       width: '50%'
     });
   }

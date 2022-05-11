@@ -50,33 +50,6 @@ export class LoginComponent implements OnInit {
 
     userFormControl = new FormControl('', [Validators.required, Validators.email]);
 
-//   login(){
-//     this.http.get<any>("http://localhost:3000/api/v2/users/")
-//     .subscribe(data => {
-//       const user = data.find((a: any) => {
-//         return a.username === this.model.username && a.password === this.model.password
-//       });
-//       if(user){
-//         alert("Logged In")
-//       }
-//     })
-// }
-//   compareUser(): void {
-//     const data = {
-//        username: this.model.username,
-//        password: this.model.password,      
-//     }
-
-//     this.loginService.check(data)
-//       .subscribe(
-//         response => {
-//           console.log(response);
-//           this.submitted = true;
-//         },
-//         error => {
-//           console.log(error);
-//         });
-//   }
 }
 
 export class InputErrorsExample {

@@ -1,0 +1,27 @@
+.card{
+    width: 900px;
+    margin: auto;
+}
+
+.login-main{
+    margin-top: 10%;
+    align-items: center;
+    }
+
+.mat-card{
+    margin: auto;
+    width: 40%;
+    align-items: center;
+}
+
+.mat-card-title{
+    display: flex;
+    justify-content: center; /* align horizontal */
+    align-items: center; /* align vertical */
+    font-size: x-large;
+  }
+  
+.mat-form-field{
+margin: auto;
+display: block;
+}

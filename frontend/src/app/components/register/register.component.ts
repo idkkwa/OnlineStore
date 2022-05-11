@@ -1,44 +1,40 @@
-import { Component, OnInit } from '@angular/core';
-import { Login } from 'models/login.model';
-import { LoginService } from 'src/app/services/login.service';
 
+import { Login } from 'models/login.model';
+
+import { Component, Inject, OnInit } from '@angular/core';
+import { Form, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { LoginService } from 'src/app/services/login.service';
+import { DialogComponent } from '../dialog/dialog.component';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  login: Login = {
-    username: '',
-    password: '',
-  };
+
+  form: FormGroup;
 
   submitted = false;
-  constructor(private loginService: LoginService) { }
-  ngOnInit(): void {}
+  constructor(    private formBuilder: FormBuilder,
+    private router: Router,
+    private http: HttpClient,
+    private api: LoginService,) { }
 
-  saveUser(): void {
-    const data = {
-      username: this.login.username,
-      password: this.login.password,
-    };
+  ngOnInit(): void {
 
-    this.loginService.create(data)
-    .subscribe(
-      response => {
-        console.log(response);
-        this.submitted = true;
-      },
-      error => {
-        console.log(error);
-      });
+    this.form = this.formBuilder.group({
+      username: ['', Validators.required],
+      password: ['', Validators.required],
+    })
   }
 
-    newUser(): void {
-      this.submitted = false;
-      this.login = {
-        username: '',
-        password: '',
-      };
-    }
+  submit(): void{
+    this.api.create(this.form.value).subscribe(() => this.router.navigate(['/login']))
+  }
+
+  registerFormControl = new FormControl('', [Validators.required, Validators.email]);
+  
 }

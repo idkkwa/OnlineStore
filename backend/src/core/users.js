@@ -58,10 +58,12 @@ const addUser = async (request, response) => {
 
 const updateUser = (request, response) => {
     const id = parseInt(request.params.id);
-    const { username, password, admin } = request.body;
+    const { username, password} = request.body;
+    const hash = bcrypt.hashSync(password, 10)
+    const admin = false;
     const client = new Client(options)
     client.connect()
-    client.query('UPDATE users SET username = $1, password = $2, admin = $3 WHERE id = $4', [username, password, admin, id], (error, results) => {
+    client.query('UPDATE users SET username = $1, password = $2, admin = $3 WHERE id = $4', [username, hash, admin, id], (error, results) => {
         response.status(200).send(`The User with id ${id} has been modified.`);
         if(error) throw error;
     });
@@ -85,7 +87,6 @@ const deleteUser = (request, response) => {
     client.connect()
     client.query('DELETE FROM users WHERE id = $1', [id], (error, results) => {
         response.status(200).send(`The User with id ${id} has been deleted.`);
-        if(error) throw error;
     });
   };
 

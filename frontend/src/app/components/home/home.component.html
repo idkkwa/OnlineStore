@@ -1,8 +1,6 @@
 <div *ngFor="let user of users;">
-
-{{user.admin}}
-
-    <div *ngIf="user.admin === false">
+  
+    <div *ngIf="!user.admin">
       <mat-chip-list aria-label="Dog selection">
         <mat-chip>
           <mat-chip-avatar>
@@ -13,29 +11,36 @@
       </mat-chip-list>      
     </div>
 
-    <div *ngIf="user.admin === true">
-        <mat-chip-list aria-label="Dog selection">
-          <mat-chip color="primary" selected>
-            <mat-chip-avatar>
-                <img src="assets/placeholder.png" alt="Grey Profile Photo"/>
-            </mat-chip-avatar>
-            {{user.username}} | Admin
-          </mat-chip>
-        </mat-chip-list>  
-        
-      <section>
-        <div class="example-label"></div>
-        <div class="example-button-row">
-          <button mat-raised-button (click)="openDialog()">Add Product</button>
+    <div *ngIf="user.admin">
+        <div class="box">
+          <div>
+              <mat-chip-list aria-label="Profile Selection">
+                <mat-chip color="primary" selected>
+                  <mat-chip-avatar>
+                      <img src="assets/placeholder.png" alt="Grey Profile Photo"/>
+                  </mat-chip-avatar>
+                  {{user.username}} | Admin
+                </mat-chip>
+              </mat-chip-list>
+            </div>
+      
+              <div>
+                <button mat-raised-button (click)="openDialog()">Add Product</button>
+              </div>
+              <div>
+                <button mat-raised-button (click)="openUserDialog()">Add User</button>
+              </div>
         </div>
-        <!-- <div class="example-button-row">
-          <button mat-raised-button (click)="openUserDialog()">Add User</button>
-        </div> -->
-      </section>
 
-      <app-product-cruddialog></app-product-cruddialog>
+        <br>
 
-    </div>
+        <app-product-cruddialog></app-product-cruddialog>
+        <br>
+        <app-user-crud-dialog></app-user-crud-dialog>
+      </div>
 </div>
+
+<br>
+<br>
 
 <app-product-list></app-product-list>

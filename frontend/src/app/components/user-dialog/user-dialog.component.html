@@ -1,0 +1,23 @@
+<p>user-dialog works!</p>
+<h1 mat-dialog-title>Add User Form</h1>
+
+<div mat-dialog-container>
+    <!-- Links to the productForm in the ts -->
+    <form [formGroup]="userForm">
+            <mat-form-field appearance="outline">
+                <mat-label>Username</mat-label>
+                <!-- formControl name sends the input into the ts file -->
+                <input formControlName="username" matInput placeholder="Placeholder">
+            </mat-form-field>
+        
+            <mat-form-field appearance="outline">
+                <mat-label>Password</mat-label>
+                <input type="password" formControlName="password" matInput placeholder="Placeholder">
+            </mat-form-field>
+
+        </form>
+</div>
+        <div mat-dialong-action align="end">
+            <button mat-raised-button color="warn" mat-dialog-close>Close</button>
+            <button style="margin-left: 8px;" mat-raised-button color="primary" (click)="addUser()" >{{actionBtn}}</button>
+        </div>
