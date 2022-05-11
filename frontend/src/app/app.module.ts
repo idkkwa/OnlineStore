@@ -21,6 +21,11 @@ import {MatChipsModule} from '@angular/material/chips';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatTableModule} from '@angular/material/table';
+import {MatDialogModule} from '@angular/material/dialog';
+import { DialogComponent } from './components/dialog/dialog.component';
+import { ProductCRUDdialogComponent } from './components/product-crud-dialog/product-cruddialog.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import {MatSortModule} from '@angular/material/sort';
 
 
 
@@ -32,7 +37,9 @@ import {MatTableModule} from '@angular/material/table';
     CartComponent,
     LoginComponent,
     RegisterComponent,
-    NavComponent
+    NavComponent,
+    DialogComponent,
+    ProductCRUDdialogComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +56,10 @@ import {MatTableModule} from '@angular/material/table';
     MatChipsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatTableModule
+    MatTableModule,
+    MatDialogModule,
+    MatPaginatorModule,
+    MatSortModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Login } from 'models/login.model';
 import { Emitters } from 'src/app/emitters/emitters';
+import {MatDialog, MatDialogModule} from '@angular/material/dialog';
+import { DialogComponent } from '../dialog/dialog.component';
 
 @Component({
   selector: 'app-home',
@@ -12,8 +14,21 @@ export class HomeComponent implements OnInit {
   message = "";
   users: Login[];
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private dialog: MatDialog
   ) { }
+
+  openDialog() {
+    this.dialog.open(DialogComponent, {
+      width: '30%'
+    });
+  }
+
+  openUserDialog() {
+    this.dialog.open(DialogComponent, {
+      width: '50%'
+    });
+  }
 
   ngOnInit(): void {
     this.http.get('http://localhost:3000/api/v2/cookie', {withCredentials: true}).subscribe(

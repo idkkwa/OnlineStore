@@ -1,3 +1,8 @@
 .mat-chip {
     width: auto;
 }
+
+.example-button-row button,
+.example-button-row a {
+  margin: auto;
+}

@@ -1,6 +1,8 @@
 <div *ngFor="let user of users;">
-    
-    <div *ngIf="!user.admin">
+
+{{user.admin}}
+
+    <div *ngIf="user.admin === false">
       <mat-chip-list aria-label="Dog selection">
         <mat-chip>
           <mat-chip-avatar>
@@ -11,7 +13,7 @@
       </mat-chip-list>      
     </div>
 
-    <div *ngIf="user.admin">
+    <div *ngIf="user.admin === true">
         <mat-chip-list aria-label="Dog selection">
           <mat-chip color="primary" selected>
             <mat-chip-avatar>
@@ -19,11 +21,21 @@
             </mat-chip-avatar>
             {{user.username}} | Admin
           </mat-chip>
-        </mat-chip-list>    
-      </div>
+        </mat-chip-list>  
+        
+      <section>
+        <div class="example-label"></div>
+        <div class="example-button-row">
+          <button mat-raised-button (click)="openDialog()">Add Product</button>
+        </div>
+        <!-- <div class="example-button-row">
+          <button mat-raised-button (click)="openUserDialog()">Add User</button>
+        </div> -->
+      </section>
 
+      <app-product-cruddialog></app-product-cruddialog>
 
-      
+    </div>
 </div>
 
 <app-product-list></app-product-list>

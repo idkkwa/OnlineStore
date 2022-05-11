@@ -1,0 +1,36 @@
+<h1 mat-dialog-title>Add Product Form</h1>
+
+<div mat-dialog-container>
+    <!-- Links to the productForm in the ts -->
+    <form [formGroup]="productForm">
+            <mat-form-field appearance="outline">
+                <mat-label>Product Name</mat-label>
+                <!-- formControl name sends the input into the ts file -->
+                <input formControlName="productname" matInput placeholder="Placeholder">
+            </mat-form-field>
+        
+            <mat-form-field appearance="outline">
+                <mat-label>Brand Name</mat-label>
+                <input formControlName="brandname" matInput placeholder="Placeholder">
+            </mat-form-field>
+        
+            <mat-form-field appearance="outline">
+                <mat-label>Price</mat-label>
+                <input formControlName="price" matInput type="number" placeholder="Placeholder">
+            </mat-form-field>
+        
+            <mat-form-field appearance="outline">
+                <mat-label>Color</mat-label>
+                <input formControlName="color" matInput placeholder="Placeholder">
+            </mat-form-field>
+        
+            <mat-form-field appearance="outline">
+                <mat-label>Product Description</mat-label>
+                <textarea formControlName="productdescription" matInput></textarea>
+            </mat-form-field>
+        </form>
+</div>
+        <div mat-dialong-action align="end">
+            <button mat-raised-button color="warn" mat-dialog-close>Close</button>
+            <button style="margin-left: 8px;" mat-raised-button color="primary" (click)="addProduct()" >{{actionBtn}}</button>
+        </div>
